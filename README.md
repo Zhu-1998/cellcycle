@@ -1,6 +1,8 @@
 # Landscape-flux of cell cycle non-equilibrium thermodynamics and dynamics constructed by single-cell transcriptomic data
-## 1. Downloading and processing the cell cycle scRNA-seq data
 
+![image](https://github.com/Zhu-1998/cellcycle/blob/main/Workflow.jpg)
+## 1. Downloading and processing the cell cycle scRNA-seq data
+We download the scRNA-seq data of cell cycle from 
 
 
 
