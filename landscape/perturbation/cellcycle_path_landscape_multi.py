@@ -1,7 +1,6 @@
 from joblib import Parallel, delayed
 import anndata
 import numpy as np
-# from multiprocessing import Pool, Lock
 import pandas as pd
 import seaborn as sns
 import sys
@@ -15,10 +14,8 @@ import warnings
 warnings.filterwarnings('ignore')
 
 
-#帮助您调试与版本相关的错误（如果有的话）
 dyn.get_all_dependencies_version()
 
-#模拟带有白色背景的 ggplot2 绘图样式
 dyn.configuration.set_figure_params('dynamo', background='white')
 
 adata = anndata.read("/home/wj/datadisk/zlg/singlecell/cellcycle/cell_cycle.h5ad")
@@ -35,7 +32,7 @@ dyn.tl.cell_velocities(
 
 dyn.vf.VectorField(adata, basis='pca')
 
-gene = "CDC20"
+gene = "CDC20"  #perturbation gene
 dyn.pd.perturbation(adata, gene, [+500], emb_basis="umap")
 # dyn.pl.streamline_plot(adata, color=["cell_cycle_phase", gene], basis="umap_perturbation")
 
@@ -61,16 +58,10 @@ def vector_field_function(x, VecFld=VecFld_perturbation, dim=None, kernel="full"
     return K
 #################################################################################
 
-##################################LHS参数抽样###################################
-def LHSample( D,bounds,N):#直接输出抽样  
-    '''
-    :param D:参数个数
-    :param bounds:参数对应范围（list）
-    :param N:拉丁超立方层数
-    :return:样本数据
-    '''
+##################################LHS###################################
+def LHSample( D,bounds,N):
 
-    result = np.empty([N, D]) #产生一个N*D的数组,元素任意
+    result = np.empty([N, D]) 
     temp = np.empty([N])
     d = 1.0 / N
 
@@ -84,17 +75,16 @@ def LHSample( D,bounds,N):#直接输出抽样
         for j in range(N):
             result[j, i] = temp[j]
 
-    #对样本数据进行拉伸
     b = np.array(bounds)
     lower_bounds = b[:,0]
     upper_bounds = b[:,1]
     if np.any(lower_bounds > upper_bounds):
-        print('范围出错')
+        print('wrong')
         return None
 
     #   sample * (upper_bound - lower_bound) + lower_bound
     np.add(np.multiply(result,(upper_bounds - lower_bounds),out=result),lower_bounds,out=result)
-    return result #直接输出抽样 
+    return result 
 #########################################################################################
 
 
@@ -102,7 +92,7 @@ VecFnc_perturbation = vector_field_function
 
 x_lim=[-4, 15]
 y_lim=[-1, 12]
-Dim = 2       #参数维数
+Dim = 2      
 bounds =[x_lim, y_lim]
 N = 400
 LHS_of_paras = LHSample(Dim, bounds, N)
@@ -184,7 +174,7 @@ def path_function(D, dt, i):
 
 
 start = time.time()	
-# 并行
+
 Parallel(n_jobs=150)(
     delayed(path_function)(0.00001, 5e-1, i)
     for i in range(N))
