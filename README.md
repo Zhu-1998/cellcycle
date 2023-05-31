@@ -2,7 +2,7 @@
 
 ![image](https://github.com/Zhu-1998/cellcycle/blob/main/Workflow.jpg)
 ## 1. Downloading and processing the cell cycle scRNA-seq data
-The scRNA-seq raw data of U2OS-FUCCI cell cycle from the paper by Mahdessian et al, which are available at GEO with accession GSE146773. For the scRNA-seq for ~1k U2OS-FUCCI data, we can follow the snakemake pipeline at https://github.com/CellProfiling/FucciSingleCellSeqPipeline to perform scRNA-Seq data preparation and general analysis including filter, dimensionality reduction and clustering analysis.
+The scRNA-seq raw data of U2OS-FUCCI cell cycle from the paper by Mahdessian et al, which are available at GEO with accession GSE146773. Then, we could follow the snakemake pipeline at https://github.com/CellProfiling/FucciSingleCellSeqPipeline to perform scRNA-Seq data preparation and general analysis including filter, dimensionality reduction and clustering analysis.
 
 The scEU-seq data of RPE1-FUCCI cell cycle can be extracted using dynamo’s CLI: dyn.sample_data.scEU_seq_rpe1() or from the paper by Battich et al, which are available at GEO with accession number GSE128365.
 
