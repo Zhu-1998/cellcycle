@@ -1,6 +1,6 @@
 # Quantifying landscape-flux via single-cell transcriptomics uncovers the underlying mechanism of cell cycle
 
-![image](https://github.com/Zhu-1998/cellcycle/blob/main/Workflow.jpg)
+![image](https://github.com/Zhu-1998/cellcycle/blob/main/Graphical abstract.jpg)
 ## 1. Downloading and processing the cell cycle scRNA-seq data
 The scRNA-seq raw data of U2OS-FUCCI cell cycle from the paper by [Mahdessian et al](https://doi.org/10.1038/s41586-021-03232-9), which are available at GEO with accession GSE146773. Then, we could follow the snakemake pipeline at https://github.com/CellProfiling/FucciSingleCellSeqPipeline to perform scRNA-Seq data preparation and general analysis including filter, dimensionality reduction and clustering analysis. The processed data of U2OS-FUCCI cell cycle is in `cell_cycle.h5ad`.
 
