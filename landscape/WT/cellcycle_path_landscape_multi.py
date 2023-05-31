@@ -8,7 +8,6 @@ Created on Sun Nov 13 02:03:39 2022
 from joblib import Parallel, delayed
 import anndata
 import numpy as np
-# from multiprocessing import Pool, Lock
 import pandas as pd
 import seaborn as sns
 import sys
@@ -21,15 +20,11 @@ dyn.dynamo_logger.main_silence()
 import warnings
 warnings.filterwarnings('ignore')
 
-
-#帮助您调试与版本相关的错误（如果有的话）
 dyn.get_all_dependencies_version()
 
-#模拟带有白色背景的 ggplot2 绘图样式
 dyn.configuration.set_figure_params('dynamo', background='white')
 
 
-#adata_labeling = anndata.read("/home/wj/datadisk/zlg/singlecell/HSC/hematopoiesis_v1.h5ad")
 adata = anndata.read("/home/wj/datadisk/zlg/singlecell/cellcycle/cell_cycle.h5ad")
 dyn.pp.recipe_monocle(adata)
 
@@ -47,7 +42,7 @@ dyn.tl.cell_wise_confidence(adata)
 
 dyn.vf.VectorField(adata, basis='umap', M=1000, pot_curl_div=True)
 
-dyn.vf.topography(adata, n=250, basis='umap');
+#dyn.vf.topography(adata, n=250, basis='umap');
 
 #dyn.pl.topography(adata, basis='umap', background='white', color=['ntr', 'cell_cycle_phase'], streamline_color='black', show_legend='on data', frontier=True)
 
@@ -82,16 +77,16 @@ def vector_field_function(x, VecFld=VecFld, dim=None, kernel="full", X_ctrl_ind=
     return K
 #################################################################################
 
-##################################LHS参数抽样###################################
-def LHSample( D,bounds,N):#直接输出抽样  
+##################################LHS###################################
+def LHSample( D,bounds,N): 
     '''
-    :param D:参数个数
-    :param bounds:参数对应范围（list）
-    :param N:拉丁超立方层数
-    :return:样本数据
+    :param D: parameter number
+    :param bounds:（list）
+    :param N: LH
+    :return: sample data
     '''
 
-    result = np.empty([N, D]) #产生一个N*D的数组,元素任意
+    result = np.empty([N, D]) 
     temp = np.empty([N])
     d = 1.0 / N
 
@@ -104,8 +99,7 @@ def LHSample( D,bounds,N):#直接输出抽样
 
         for j in range(N):
             result[j, i] = temp[j]
-
-    #对样本数据进行拉伸
+	
     b = np.array(bounds)
     lower_bounds = b[:,0]
     upper_bounds = b[:,1]
@@ -115,14 +109,14 @@ def LHSample( D,bounds,N):#直接输出抽样
 
     #   sample * (upper_bound - lower_bound) + lower_bound
     np.add(np.multiply(result,(upper_bounds - lower_bounds),out=result),lower_bounds,out=result)
-    return result #直接输出抽样 
+    return result 
 #########################################################################################
 
 VecFnc = vector_field_function
 
 x_lim=[-4, 15]
 y_lim=[-1, 12]
-Dim = 2       #参数维数
+Dim = 2   
 bounds =[x_lim, y_lim]
 N = 400
 LHS_of_paras = LHSample(Dim, bounds, N)
@@ -206,7 +200,7 @@ def path_function(D, dt, i):
 
 
 start = time.time()
-# 并行
+
 Parallel(n_jobs=150)(
     delayed(path_function)(0.00001, 5e-1, i)
     for i in range(N))
