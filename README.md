@@ -21,5 +21,6 @@ We can reconstruct the vector field based RNA velocity with `dyn.vf.VectorField(
 ## 4. Quantifying landscape-flux of cell cycle global dynamics and thermodynamics
 We can learn an analytical function of vector field from sparse single cell samples on the entire space robustly by `vector_field_function`. Then, we could simulate stochastic dynamics by solving the Langevin equation based analytical function and quantify the non-equilibrium landscape-flux of the cell cycle.
 
-#Cite:
+
+## Cite:
 L. Zhu, J. Wang, Quantifying Landscape-Flux via Single-Cell Transcriptomics Uncovers the Underlying Mechanism of Cell Cycle. Adv. Sci. 2024, 2308879. https://doi.org/10.1002/advs.202308879
