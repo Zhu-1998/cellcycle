@@ -2,7 +2,7 @@
 
 ![image](https://github.com/Zhu-1998/cellcycle/blob/main/Graphical-abstract.jpg)
 ## 1. Downloading and processing the cell cycle scRNA-seq data
-The scRNA-seq raw data of U2OS-FUCCI cell cycle from the paper by [Mahdessian et al](https://doi.org/10.1038/s41586-021-03232-9), which are available at GEO with accession GSE146773. Then, we could follow the snakemake pipeline at https://github.com/CellProfiling/FucciSingleCellSeqPipeline to perform scRNA-Seq data preparation and general analysis including filter, dimensionality reduction and clustering analysis. The processed data of U2OS-FUCCI cell cycle is in `cell_cycle.h5ad`.
+The scRNA-seq raw data of U2OS-FUCCI cell cycle from the paper by [Mahdessian et al](https://doi.org/10.1038/s41586-021-03232-9), which are available at GEO with accession GSE146773. Then, we could follow the [snakemake pipeline](https://github.com/CellProfiling/FucciSingleCellSeqPipeline) to perform scRNA-Seq data preparation and general analysis including filter, dimensionality reduction and clustering analysis. The processed data of U2OS-FUCCI cell cycle is in `cell_cycle.h5ad`.
 
 The scEU-seq data of RPE1-FUCCI cell cycle can be extracted using [dynamo](https://github.com/aristoteleo/dynamo-release)’s CLI: `dyn.sample_data.scEU_seq_rpe1()` or from the paper by [Battich et al](https://doi.org/10.1126/science.aax3072), which are available at GEO with accession number GSE128365.
 
@@ -21,5 +21,5 @@ We can reconstruct the vector field based RNA velocity with `dyn.vf.VectorField(
 ## 4. Quantifying landscape-flux of cell cycle global dynamics and thermodynamics
 We can learn an analytical function of vector field from sparse single cell samples on the entire space robustly by `vector_field_function`. Then, we could simulate stochastic dynamics by solving the Langevin equation based analytical function and quantify the non-equilibrium landscape-flux of the cell cycle.
 
-
-
+#Cite:
+L. Zhu, J. Wang, Quantifying Landscape-Flux via Single-Cell Transcriptomics Uncovers the Underlying Mechanism of Cell Cycle. Adv. Sci. 2024, 2308879. https://doi.org/10.1002/advs.202308879
